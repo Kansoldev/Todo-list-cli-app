@@ -18,6 +18,18 @@ async function addTodo(todos = []) {
   process.stdout.write(`Tasks successfully added (ID: ${newTodo.id})`);
 }
 
+async function deleteTodo() {
+  try {
+    const todos = JSON.parse(await fs.readFile("tasks.json", "utf-8"));
+    const remainingTodos = todos.filter((todo) => todo.id != process.argv[3]);
+
+    await fs.writeFile("tasks.json", JSON.stringify(remainingTodos));
+    process.stdout.write(`Tasks deleted successfully (ID: ${process.argv[3]})`);
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function setupTodoList() {
   try {
     const todos = JSON.parse(await fs.readFile("tasks.json", "utf-8"));
@@ -35,6 +47,10 @@ async function setupTodoList() {
 switch (process.argv[2]) {
   case "add":
     setupTodoList();
+    break;
+
+  case "delete":
+    deleteTodo();
     break;
 
   default:
