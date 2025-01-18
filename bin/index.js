@@ -3,6 +3,23 @@
 import fs from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 
+async function displayTasks() {
+  const todos = JSON.parse(await fs.readFile("tasks.json", "utf-8"));
+
+  switch (process.argv[3]) {
+    case "done":
+      console.log(todos.filter((todo) => todo.status == "done"));
+      break;
+
+    case "in-progress":
+      console.log(todos.filter((todo) => todo.status == "in-progress"));
+      break;
+
+    default:
+      console.log(todos);
+  }
+}
+
 async function addTodo(todos = []) {
   const newTodo = {
     id: randomUUID(),
@@ -70,6 +87,10 @@ switch (process.argv[2]) {
 
   case "update":
     updateTodo();
+    break;
+
+  case "list":
+    displayTasks();
     break;
 
   default:
