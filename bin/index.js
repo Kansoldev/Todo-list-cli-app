@@ -62,6 +62,21 @@ async function updateTodo() {
   process.stdout.write(`Tasks successfully updated (ID: ${process.argv[3]})`);
 }
 
+async function updateStatus(status = "done") {
+  const todos = JSON.parse(await fs.readFile("tasks.json", "utf-8"));
+  const modifiedTodos = todos.map((todo) => {
+    if (todo.id == process.argv[3]) {
+      todo.status = status;
+      todo.updatedAt = new Date().toLocaleString();
+    }
+
+    return todo;
+  });
+
+  await fs.writeFile("tasks.json", JSON.stringify(modifiedTodos));
+  process.stdout.write(`Task status updated (ID: ${process.argv[3]})`);
+}
+
 async function setupTodoList() {
   try {
     const todos = JSON.parse(await fs.readFile("tasks.json", "utf-8"));
@@ -87,6 +102,18 @@ switch (process.argv[2]) {
 
   case "update":
     updateTodo();
+    break;
+
+  case "mark-done":
+    updateStatus();
+    break;
+
+  case "mark-in-progress":
+    updateStatus("in-progress");
+    break;
+
+  case "mark-todo":
+    updateStatus("todo");
     break;
 
   case "list":
