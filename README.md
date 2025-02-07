@@ -1,6 +1,6 @@
 # Todo-list-cli-app
 
-A cli application that helps you create and manage to-do lists. It is easy to use and can run anywhere in your system.
+A cli application that helps you create and manage to-do lists. It is easy to use and can run anywhere in your system. The project was built from roadmap.sh [backend projects](https://roadmap.sh/projects/task-tracker)
 
 ## Prerequisites
 
@@ -30,6 +30,6 @@ If you already have a to-do lists created before, be sure the terminal is in the
 
 ## Contribution
 
-If you would like to contribute to this project, make a fork of the repo, make your changes and submit a pull request
+If you would like to contribute to this project, make a fork of the repo, make your changes and submit a pull request.
 Thanks for using this cli application.
 You can check out my [portfolio](https://kansoldev.netlify.app) to find out more about me and the kind of work I do.
